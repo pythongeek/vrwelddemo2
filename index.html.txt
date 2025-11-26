@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRWeld - Transform Technical Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #2d3748;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Animated Background Gradients */
+        .gradient-bg-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+        }
+        
+        .gradient-bg-2 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            position: relative;
+        }
+        
+        .gradient-bg-3 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            position: relative;
+        }
+        
+        .gradient-bg-4 {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            position: relative;
+        }
+        
+        .gradient-bg-5 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            position: relative;
+        }
+        
+        /* Floating Orbs Background Effect */
+        .bg-orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+        
+        .orb:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -50px) rotate(90deg); }
+            50% { transform: translate(-20px, 40px) rotate(180deg); }
+            75% { transform: translate(50px, 20px) rotate(270deg); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 1200px;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideDown 1s ease-out;
+            letter-spacing: -2px;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero p {
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.95);
+            animation: fadeIn 1s ease-out 0.3s both;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Section Styling */
+        .section {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            letter-spacing: -1px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+        
+        /* Media Container with Glass Effect */
+        .media-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 3rem auto;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .media-container:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+        }
+        
+        .media-container iframe {
+            display: block;
+        }
+        
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 5rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+        }
+        
+        .benefit-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+        }
+        
+        .benefit-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .feature-card p, .benefit-item p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .stat-number {
+            font-size: 5rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-label {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+        
+        /* Benefits List */
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 3;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-15px); }
+            60% { transform: translateX(-50%) translateY(-8px); }
+        }
+        
+        .arrow-down {
+            width: 35px;
+            height: 35px;
+            border-left: 4px solid white;
+            border-bottom: 4px solid white;
+            transform: rotate(-45deg);
+            filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
+        }
+        
+        /* Parallax Effect */
+        .parallax-wrapper {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        /* Pulse Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section {
+                padding: 5rem 1.5rem;
+            }
+            
+            .feature-grid, .benefits-list, .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+        }
+        
+        /* Shine Effect on Hover */
+        .shine {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            bottom: -50%;
+            left: -50%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: rotateZ(60deg) translate(-5em, 7.5em);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotateZ(60deg) translate(-5em, 7.5em); }
+            100% { transform: rotateZ(60deg) translate(20em, -20em); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero gradient-bg-1">
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="hero-content shine">
+            <h1>Master Tomorrow's Skills Today</h1>
+            <p>Revolutionary VR training transforming high school students into certified technical professionals</p>
+            <a href="#journey" class="cta-button">Start Your Journey →</a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="arrow-down"></div>
+        </div>
+    </section>
+
+    <!-- Interactive 3D Learning Section -->
+    <section class="section gradient-bg-2">
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="container parallax-wrapper">
+            <h2 class="section-title">Learn By Doing, Not Just Watching</h2>
+            <p class="section-subtitle">Immersive 3D visualization brings complex technical concepts to life</p>
+            
+            <div class="media-container">
+                <div style="height:0;padding-bottom:56.11%;position:relative;">
+                    <iframe width="100%" height="100%" style="position:absolute;top:0;left:0;" frameBorder="0" src="https://imgflip.com/embed/ad7l7x"></iframe>
+                </div>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3 class="benefit-title">9 Professional Models</h3>
+                    <p>From welding to HVAC, explore real-world technical structures in stunning 3D detail</p>
+                </div>
+                <div class="feature-card">
+                    <div class="benefit-icon">🔄</div>
+                    <h3 class="benefit-title">360° Manipulation</h3>
+                    <p>Rotate, zoom, and examine every angle—understanding through interaction</p>
+                </div>
+                <div class="feature-card">
+                    <div class="benefit-icon">📐</div>
+                    <h3 class="benefit-title">Technical Blueprints</h3>
+                    <p>Master orthographic views with toggleable layers: dimensions, welds, center lines</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AR Experience Section -->
+    <section class="section gradient-bg-3">
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="container parallax-wrapper">
+            <h2 class="section-title">AR Meets Education</h2>
+            <p class="section-subtitle">Watch 2D drawings transform into 3D reality before your eyes</p>
+            
+            <div class="media-container">
+                <div style="height:0;padding-bottom:56.11%;position:relative;">
+                    <iframe width="100%" height="100%" style="position:absolute;top:0;left:0;" frameBorder="0" src="https://imgflip.com/embed/ad7lhf"></iframe>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card pulse">
+                    <div class="stat-number">3x</div>
+                    <div class="stat-label">Faster Learning</div>
+                </div>
+                <div class="stat-card pulse">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Retention Rate</div>
+                </div>
+                <div class="stat-card pulse">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Safe Practice</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hands-On Training Section -->
+    <section class="section gradient-bg-4">
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="container parallax-wrapper">
+            <h2 class="section-title">Real Skills, Virtual Environment</h2>
+            <p class="section-subtitle">Practice welding, HVAC systems, and electrical work without the risks</p>
+            
+            <div class="media-container">
+                <div style="height:0;padding-bottom:56.11%;position:relative;">
+                    <iframe width="100%" height="100%" style="position:absolute;top:0;left:0;" frameBorder="0" src="https://imgflip.com/embed/ad7lkw"></iframe>
+                </div>
+            </div>
+            
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <h3 class="benefit-title">Welding Mastery</h3>
+                    <p>Perfect your technique with instant feedback and unlimited practice</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">❄️</div>
+                    <h3 class="benefit-title">HVAC Systems</h3>
+                    <p>Understand heating, ventilation, and cooling in interactive 3D environments</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔌</div>
+                    <h3 class="benefit-title">Electrical Tech</h3>
+                    <p>Build circuits and troubleshoot systems safely in virtual space</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏗️</div>
+                    <h3 class="benefit-title">Manufacturing</h3>
+                    <p>Learn mechanical assembly and automation technology hands-on</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOM & Technical Details Section -->
+    <section class="section gradient-bg-5">
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="container parallax-wrapper">
+            <h2 class="section-title" style="color: #667eea;">Professional Documentation Skills</h2>
+            <p class="section-subtitle" style="color: #4a5568;">Learn to read and create Bills of Materials like industry pros</p>
+            
+            <div class="media-container">
+                <div style="height:0;padding-bottom:56.11%;position:relative;">
+                    <iframe width="100%" height="100%" style="position:absolute;top:0;left:0;" frameBorder="0" src="https://imgflip.com/embed/ad7lmv"></iframe>
+                </div>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card" style="background: rgba(102, 126, 234, 0.15);">
+                    <h3 class="benefit-title" style="color: #667eea;">Material Specifications</h3>
+                    <p style="color: #4a5568;">Understand steel grades, tube dimensions, and industry standards</p>
+                </div>
+                <div class="feature-card" style="background: rgba(102, 126, 234, 0.15);">
+                    <h3 class="benefit-title" style="color: #667eea;">Technical Reading</h3>
+                    <p style="color: #4a5568;">Decode welding symbols, dimensions, and engineering drawings</p>
+                </div>
+                <div class="feature-card" style="background: rgba(102, 126, 234, 0.15);">
+                    <h3 class="benefit-title" style="color: #667eea;">Real-World Projects</h3>
+                    <p style="color: #4a5568;">Work with actual structures: bridges, joints, poles, and assemblies</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Story Section -->
+    <section id="journey" class="section gradient-bg-1">
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="container parallax-wrapper">
+            <h2 class="section-title">From Classroom to Career</h2>
+            <p class="section-subtitle">High school students gaining college-level technical skills</p>
+            
+            <div class="media-container" style="max-width: 600px;">
+                <div style="height:0;padding-bottom:177.69%;position:relative;">
+                    <iframe width="100%" height="100%" style="position:absolute;top:0;left:0;" frameBorder="0" src="https://imgflip.com/embed/ad7kzj"></iframe>
+                </div>
+            </div>
+            
+            <div class="benefits-list" style="margin-top: 4rem;">
+                <div class="benefit-item">
+                    <h3 class="benefit-title">🎓 Certification Ready</h3>
+                    <p>Graduate with industry-recognized skills in welding, HVAC, and electrical systems</p>
+                </div>
+                <div class="benefit-item">
+                    <h3 class="benefit-title">💼 Career Pathways</h3>
+                    <p>Direct pipeline to high-demand jobs in manufacturing, aerospace, and building automation</p>
+                </div>
+                <div class="benefit-item">
+                    <h3 class="benefit-title">🚀 Future-Proof Skills</h3>
+                    <p>Master technologies that combine traditional trades with cutting-edge VR innovation</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="#contact" class="cta-button">Transform Your School Today →</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer with stagger effect
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .benefit-item, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            observer.observe(el);
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.parallax-wrapper').forEach((el, index) => {
+                const speed = 0.3;
+                el.style.transform = `translateY(${scrolled * speed * (index % 2 === 0 ? 1 : -1) * 0.1}px)`;
+            });
+        });
+
+        // Add smooth reveal on page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html> 
