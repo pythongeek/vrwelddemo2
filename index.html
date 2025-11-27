@@ -95,6 +95,41 @@
             75% { transform: translate(50px, 20px) rotate(270deg); }
         }
         
+        /* 3D Particles Background Effect */
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            animation: float-particle 15s infinite linear;
+        }
+        
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) scale(1);
+                opacity: 0;
+            }
+        }
+        
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -103,26 +138,37 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding: 2rem; /* Added padding for smaller screens */
+            padding: 2rem;
+        }
+        
+        .hero-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            width: 100%;
+            z-index: 2;
+            gap: 3rem;
         }
         
         .hero-content {
+            flex: 1;
+            min-width: 300px;
             text-align: center;
-            z-index: 2;
             padding: 2rem;
-            max-width: 1200px;
             position: relative;
         }
         
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem); /* Adjusted responsive font size */
+            font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 900;
             margin-bottom: 1.5rem;
             color: white;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             animation: slideDown 1s ease-out;
             letter-spacing: -2px;
-            line-height: 1.2; /* Improved line height */
+            line-height: 1.2;
         }
         
         @keyframes slideDown {
@@ -137,13 +183,13 @@
         }
         
         .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.5rem); /* Adjusted responsive font size */
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
             margin-bottom: 3rem;
             color: rgba(255, 255, 255, 0.95);
             animation: fadeIn 1s ease-out 0.3s both;
             font-weight: 300;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 800px; /* Limit width for readability */
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -155,12 +201,12 @@
         
         .cta-button {
             display: inline-block;
-            padding: 1.2rem 3rem; /* Adjusted padding */
+            padding: 1.2rem 3rem;
             background: white;
             color: #667eea;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 1.2rem; /* Adjusted font size */
+            font-size: 1.2rem;
             font-weight: 700;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -185,25 +231,142 @@
         }
         
         .cta-button:hover {
-            transform: translateY(-5px) scale(1.02); /* Smoother hover effect */
+            transform: translateY(-5px) scale(1.02);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 3D Enhanced GIF Container for Hero */
+        .hero-gif-container {
+            flex: 1;
+            min-width: 300px;
+            perspective: 1000px;
+            margin: 20px;
+            z-index: 2;
+        }
+        
+        .gif-wrapper {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotateX(5deg) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg) rotateY(5deg); }
+            100% { transform: translateY(0px) rotateX(5deg) rotateY(0deg); }
+        }
+        
+        .gif-wrapper:hover {
+            transform: rotateX(10deg) rotateY(15deg) scale(1.05);
+        }
+        
+        .gif-frame {
+            position: relative;
+            height: 0;
+            padding-bottom: 56.11%;
+            transform: translateZ(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+                0 0 30px rgba(59, 130, 246, 0.5);
+        }
+        
+        .gif-frame::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
+            border-radius: 15px;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .gif-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 13px;
+            border: none;
+        }
+        
+        .gif-caption {
+            text-align: center;
+            margin-top: 20px;
+            transform: translateZ(30px);
+        }
+        
+        .gif-caption a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .gif-caption a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .reflection {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+            transform: scaleY(-1) rotateX(180deg);
+            opacity: 0.3;
+            border-radius: 0 0 15px 15px;
+            overflow: hidden;
+        }
+        
+        .reflection iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            opacity: 0.2;
+            transform: translateY(-50%);
         }
         
         /* Section Styling */
         .section {
-            padding: 6rem 2rem; /* Adjusted padding for better spacing */
+            padding: 6rem 2rem;
             position: relative;
         }
         
         .container {
-            max-width: 1200px; /* Standard container width */
+            max-width: 1200px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
         }
         
         .section-title {
-            font-size: clamp(2rem, 4vw, 3.5rem); /* Responsive title size */
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 900;
             text-align: center;
             margin-bottom: 1rem;
@@ -217,57 +380,89 @@
             text-align: center;
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 3rem; /* Consistent margin */
+            margin-bottom: 3rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             font-weight: 300;
         }
         
-        /* Media Container with Glass Effect */
+        /* 3D Enhanced Media Container */
         .media-container {
             width: 100%;
-            max-width: 800px; /* Optimal width for video/embeds */
-            margin: 0 auto 4rem; /* Added bottom margin */
-            border-radius: 20px; /* Slightly softer radius */
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Refined shadow */
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Thinner border */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            position: relative;
+            animation: float-media 8s ease-in-out infinite;
+        }
+        
+        @keyframes float-media {
+            0% { transform: translateY(0px) rotateX(5deg) rotateY(0deg); }
+            50% { transform: translateY(-15px) rotateX(5deg) rotateY(5deg); }
+            100% { transform: translateY(0px) rotateX(5deg) rotateY(0deg); }
+        }
+        
+        .media-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.7), rgba(255,255,255,0.3), rgba(255,255,255,0.7));
+            border-radius: 20px;
+            z-index: -1;
+            animation: rotate-border 6s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes rotate-border {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .media-container:hover {
-            transform: translateY(-10px) scale(1.01); /* Subtle hover */
+            transform: translateY(-10px) scale(1.01) rotateX(10deg) rotateY(15deg);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
         }
         
         .media-container iframe {
             display: block;
+            border-radius: 18px;
         }
         
         /* Feature Grid */
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-            gap: 2rem; /* Consistent gap */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-top: 2rem;
         }
         
         .feature-card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Thinner border */
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             padding: 2.5rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            height: 100%; /* Ensure equal height */
+            height: 100%;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Left align content */
+            align-items: flex-start;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
         }
         
         .feature-card::before {
@@ -276,11 +471,11 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px; /* Thinner accent line */
+            height: 3px;
             background: linear-gradient(90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
             transform: scaleX(0);
             transition: transform 0.5s ease;
-            transform-origin: left; /* Animate from left */
+            transform-origin: left;
         }
         
         .feature-card:hover::before {
@@ -288,13 +483,13 @@
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) translateZ(20px);
             background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); /* Refined shadow */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
         
         .benefit-icon {
-            font-size: 3rem; /* Slightly smaller icon */
+            font-size: 3rem;
             margin-bottom: 1.5rem;
             filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
         }
@@ -316,7 +511,7 @@
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -329,15 +524,17 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
         }
         
         .stat-card:hover {
-            transform: translateY(-10px) scale(1.03);
+            transform: translateY(-10px) scale(1.03) translateZ(20px);
             background: rgba(255, 255, 255, 0.25);
         }
         
         .stat-number {
-            font-size: 3.5rem; /* Adjusted size */
+            font-size: 3.5rem;
             font-weight: 900;
             color: white;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -350,7 +547,7 @@
             font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
-            text-transform: uppercase; /* Added uppercase for style */
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
         
@@ -374,10 +571,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
         }
         
         .benefit-item:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px) scale(1.02) translateZ(20px);
             background: rgba(255, 255, 255, 0.25);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
@@ -390,7 +589,7 @@
             transform: translateX(-50%);
             animation: bounce 2s infinite;
             z-index: 3;
-            cursor: pointer; /* Added cursor */
+            cursor: pointer;
         }
         
         @keyframes bounce {
@@ -400,9 +599,9 @@
         }
         
         .arrow-down {
-            width: 25px; /* Slightly smaller */
+            width: 25px;
             height: 25px;
-            border-left: 3px solid white; /* Thinner line */
+            border-left: 3px solid white;
             border-bottom: 3px solid white;
             transform: rotate(-45deg);
             filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
@@ -421,7 +620,7 @@
         }
         
         .pulse {
-            animation: pulse 3s ease-in-out infinite; /* Subtle pulse */
+            animation: pulse 3s ease-in-out infinite;
         }
         
         /* Shine Effect on Hover */
@@ -439,7 +638,7 @@
             left: -50%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, 0) 100%);
             transform: rotateZ(60deg) translate(-5em, 7.5em);
-            animation: shine 6s infinite; /* Slower shine */
+            animation: shine 6s infinite;
         }
         
         @keyframes shine {
@@ -473,6 +672,10 @@
             .hero p {
                 font-size: 1.1rem;
             }
+            
+            .hero-container {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -483,11 +686,30 @@
             <div class="orb"></div>
             <div class="orb"></div>
         </div>
-        <div class="hero-content shine">
-            <h1>Master Tomorrow's Skills Today</h1>
-            <p>Revolutionary VR training transforming high school students into certified technical professionals</p>
-            <a href="#journey" class="cta-button">Start Your Journey →</a>
+        <div class="bg-particles" id="hero-particles"></div>
+        
+        <div class="hero-container">
+            <div class="hero-content shine">
+                <h1>Master Tomorrow's Skills Today</h1>
+                <p>Revolutionary VR training transforming high school students into certified technical professionals</p>
+                <a href="#journey" class="cta-button">Start Your Journey →</a>
+            </div>
+            
+            <div class="hero-gif-container">
+                <div class="gif-wrapper">
+                    <div class="gif-frame">
+                        <iframe width="360" height="202" frameBorder="0" src="https://imgflip.com/embed/adcrrw"></iframe>
+                    </div>
+                    <div class="reflection">
+                        <iframe width="360" height="202" frameBorder="0" src="https://imgflip.com/embed/adcrrw"></iframe>
+                    </div>
+                    <div class="gif-caption">
+                        <a href="https://imgflip.com/gif/adcrrw">via Imgflip</a>
+                    </div>
+                </div>
+            </div>
         </div>
+        
         <div class="scroll-indicator">
             <a href="#interactive-learning"><div class="arrow-down"></div></a>
         </div>
@@ -498,6 +720,7 @@
             <div class="orb"></div>
             <div class="orb"></div>
         </div>
+        <div class="bg-particles" id="section2-particles"></div>
         <div class="container parallax-wrapper">
             <h2 class="section-title">Learn By Doing, Not Just Watching</h2>
             <p class="section-subtitle">Immersive 3D visualization brings complex technical concepts to life</p>
@@ -533,6 +756,7 @@
             <div class="orb"></div>
             <div class="orb"></div>
         </div>
+        <div class="bg-particles" id="section3-particles"></div>
         <div class="container parallax-wrapper">
             <h2 class="section-title">AR Meets Education</h2>
             <p class="section-subtitle">Watch 2D drawings transform into 3D reality before your eyes</p>
@@ -565,6 +789,7 @@
             <div class="orb"></div>
             <div class="orb"></div>
         </div>
+        <div class="bg-particles" id="section4-particles"></div>
         <div class="container parallax-wrapper">
             <h2 class="section-title">Real Skills, Virtual Environment</h2>
             <p class="section-subtitle">Practice welding, HVAC systems, and electrical work without the risks</p>
@@ -605,6 +830,7 @@
             <div class="orb"></div>
             <div class="orb"></div>
         </div>
+        <div class="bg-particles" id="section5-particles"></div>
         <div class="container parallax-wrapper">
             <h2 class="section-title" style="color: #4a5568;">Professional Documentation Skills</h2>
             <p class="section-subtitle" style="color: #4a5568;">Learn to read and create Bills of Materials like industry pros</p>
@@ -637,6 +863,7 @@
             <div class="orb"></div>
             <div class="orb"></div>
         </div>
+        <div class="bg-particles" id="journey-particles"></div>
         <div class="container parallax-wrapper">
             <h2 class="section-title">From Classroom to Career</h2>
             <p class="section-subtitle">High school students gaining college-level technical skills</p>
@@ -720,6 +947,95 @@
                 document.body.style.transition = 'opacity 0.5s ease';
                 document.body.style.opacity = '1';
             }, 100);
+        });
+
+        // Create floating particles for each section
+        function createParticles(containerId, particleCount = 30) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 2px and 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // Random animation duration
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize particles for each section
+        createParticles('hero-particles');
+        createParticles('section2-particles');
+        createParticles('section3-particles');
+        createParticles('section4-particles');
+        createParticles('section5-particles');
+        createParticles('journey-particles');
+
+        // Add mouse interaction for 3D effect on media containers
+        document.addEventListener('mousemove', function(e) {
+            const mediaContainers = document.querySelectorAll('.media-container');
+            
+            mediaContainers.forEach(container => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateY = (x - centerX) / 25;
+                const rotateX = (centerY - y) / 25;
+                
+                container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // Reset media container transform on mouse leave
+        document.addEventListener('mouseleave', function() {
+            const mediaContainers = document.querySelectorAll('.media-container');
+            
+            mediaContainers.forEach(container => {
+                container.style.transform = '';
+            });
+        });
+
+        // Add mouse interaction for hero 3D GIF
+        document.addEventListener('DOMContentLoaded', function() {
+            const gifWrapper = document.querySelector('.hero .gif-wrapper');
+            
+            if (gifWrapper) {
+                document.addEventListener('mousemove', function(e) {
+                    const rect = gifWrapper.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateY = (x - centerX) / 25;
+                    const rotateX = (centerY - y) / 25;
+                    
+                    gifWrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                
+                // Reset on mouse leave
+                document.addEventListener('mouseleave', function() {
+                    gifWrapper.style.transform = 'rotateX(5deg) rotateY(0deg)';
+                });
+            }
         });
     </script>
 </body>
